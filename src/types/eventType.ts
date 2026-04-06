@@ -6,4 +6,5 @@ export type EventType = {
   venue: string;
   address: string;
   city: string;
+  
 };

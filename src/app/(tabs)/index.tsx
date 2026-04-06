@@ -26,6 +26,7 @@ export default function App() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [searchedData, setSearchedData] = useState<EventType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  
 
 const [selectedCity, setSelectedCity] = useState<CityType>(mainCities[0]);
 

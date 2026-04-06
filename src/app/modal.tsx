@@ -1,9 +1,9 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 import { FavouritesContext } from "@/context/FavouritesContext";
 import { EventType } from "@/types/eventType";
-
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export default function Modal() {
   const router = useRouter();
@@ -20,9 +20,10 @@ export default function Modal() {
 
   const { favourites, setFavourites } = useContext(FavouritesContext);
 
-  function addToFavourites() {
-   
+  //Kontrollerar om eventet finns i favoriter.
+  const isFavourite = favourites.some((fav) => fav.id === id);
 
+  function toggleFavourite() {
     const favouriteEvent: EventType = {
       id,
       title,
@@ -33,16 +34,16 @@ export default function Modal() {
       city,
     };
 
-    //Man kan ej lägga till en favorit 2 ggr.
-    if (favourites.some((item) => item.id)) {
-      return;
+    //Om hjärtat är ifyllt (eventet finns i favoriter) kan man klicka på det
+    //för att ta bort eventet från favoriter.
+    if (isFavourite) {
+      setFavourites(favourites.filter(event => event.id !== id));
     }
-
-    const updatedFavourites = [...favourites, favouriteEvent];
-
-    setFavourites(updatedFavourites);
-    console.log(updatedFavourites);
-  }
+      else {
+        setFavourites([...favourites, favouriteEvent]);
+      }
+    }
+  
 
   return (
     <View style={styles.modal}>
@@ -54,19 +55,19 @@ export default function Modal() {
           borderWidth: 2,
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: 30
+          marginBottom: 30,
         }}
         onPress={() => router.back()}
       >
         <Text>Stäng ner</Text>
       </Pressable>
       <View style={styles.modalContent}>
-      <Text>{title}</Text>
-      <Text>{venue}</Text>
-      <Text>{date}</Text>
-      <Text>{time}</Text>
-      <Text>{address}</Text>
-      <Text>{city}</Text>
+        <Text>{title}</Text>
+        <Text>{venue}</Text>
+        <Text>{date}</Text>
+        <Text>{time}</Text>
+        <Text>{address}</Text>
+        <Text>{city}</Text>
       </View>
       <Pressable
         style={{
@@ -76,13 +77,15 @@ export default function Modal() {
           borderWidth: 2,
           alignItems: "center",
           justifyContent: "center",
-          marginTop: 40
+          marginTop: 40,
         }}
-        onPress={() => {
-          addToFavourites();
-        }}
+        onPress={toggleFavourite}
       >
-        <Text>Spara</Text>
+        <MaterialCommunityIcons
+          name={isFavourite ? "heart" : "heart-outline"}
+          size={24}
+          color="black"
+        />
       </Pressable>
     </View>
   );

@@ -1,45 +1,47 @@
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useContext } from "react";
-import { Pressable, Text } from "react-native";
+import { Pressable} from "react-native";
 import { FavouritesContext } from "../context/FavouritesContext";
 import { EventType } from "../types/eventType";
+
 
 type Props = {
   item: EventType;
 };
 
+
+
 export default function AddToFavouritesBtn({ item }: Props) {
-  
+
   const { favourites, setFavourites } = useContext(FavouritesContext);
 
-  function addToFavourites() {
-    const favouriteEvent: EventType = {
-      id: item.id,
-      title: item.title,
-      date: item.date,
-      time: item.time,
-      venue: item.venue,
-      address: item.address,
-      city: item.city,
-    };
+  //isFavourite är sann om eventet redan finns i favoriter
+  const isFavourite = favourites.some((fav) => fav.id === item.id);
 
-    //Om evenemanget redan finns i favoriter läggs det inte till igen.
-    if (favourites.some((fav) => fav.id === favouriteEvent.id)) {
-      return;
+  function toggleFavourite() {
+
+    //Om hjärtat är ifyllt (eventet finns i favoriter) kan man klicka på det
+    //för att ta bort eventet från favoriter.
+    if (isFavourite) {
+      setFavourites(favourites.filter(event => event.id !== item.id));
     }
+      else {
+        setFavourites([...favourites, item]);
+      }
+    }
+  
 
-    const updatedFavourites = [...favourites, favouriteEvent];
 
-    setFavourites(updatedFavourites);
-    console.log(updatedFavourites);
-  }
 
   return (
     <Pressable
-      onPress={() => {
-        addToFavourites();
-      }}
+      onPress={toggleFavourite}
     >
-      <Text>❤️</Text>
+      <MaterialCommunityIcons
+        name={isFavourite ? "heart" : "heart-outline"}
+        size={24}
+        color="black"
+      />
     </Pressable>
   );
 }

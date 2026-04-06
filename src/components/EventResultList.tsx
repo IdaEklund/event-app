@@ -7,6 +7,7 @@ import Item from "./Item";
 type Props = {
   data: EventType[];
   setVisibleCount?: Dispatch<SetStateAction<number>>;
+  
 };
 
 export default function EventResultList({ data, setVisibleCount }: Props) {
@@ -14,9 +15,20 @@ export default function EventResultList({ data, setVisibleCount }: Props) {
     <FlatList
       data={data}
       renderItem={({ item }: { item: EventType }) => (
-        <View style={{backgroundColor: "lightgrey", margin: 8, padding: 4, borderColor: "black", borderRadius:8, borderWidth:3}}>
+        <View
+          style={{
+            backgroundColor: "lightgrey",
+            margin: 8,
+            padding: 4,
+            borderColor: "black",
+            borderRadius: 8,
+            borderWidth: 3,
+          }}
+        >
           <Item item={item}></Item>
-          <AddToFavouritesBtn item={item}></AddToFavouritesBtn>
+          <AddToFavouritesBtn
+            item={item}
+          ></AddToFavouritesBtn>
         </View>
       )}
       keyExtractor={(item) => String(item.id)}
