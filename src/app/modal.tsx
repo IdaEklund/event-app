@@ -1,5 +1,5 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 import { FavouritesContext } from "@/context/FavouritesContext";
 import { EventType } from "@/types/eventType";
