@@ -35,17 +35,6 @@ export default function TabsLayout() {
           ),
         }}
       ></Tabs.Screen>
-      <Tabs.Screen
-        name="about"
-        options={{
-          title: "Om",
-          tabBarActiveTintColor: "white",
-          tabBarInactiveTintColor: "grey",
-          tabBarIcon: () => (
-            <FontAwesome name="info-circle" size={20} color={"grey"}></FontAwesome>
-          ),
-        }}
-      ></Tabs.Screen>
     </Tabs>
   );
 }
