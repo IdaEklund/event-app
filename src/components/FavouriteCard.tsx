@@ -27,7 +27,7 @@ export default function FavouriteCard({
       style={styles.cardContainer}
     >
       <Text style={styles.titleText}>{title}</Text>
-      {venue && <Text style={{ fontSize: 16}}>{venue}</Text>}
+      {venue && <Text style={styles.bodyText}>{venue}</Text>}
       <Text style={styles.bodyText}>{date}{", "}{time}</Text>
       <Text style={styles.bodyText}>{address}</Text>
       <Text style={styles.italicText}>{city}</Text>
@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   removeText: {
-    fontWeight: "800", marginTop: 20 
+    fontWeight: "800", 
+    marginTop: 20,
+    fontSize: 16
   }
 });

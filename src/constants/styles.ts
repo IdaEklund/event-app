@@ -6,4 +6,5 @@ export const colors = {
   background: "#000000",
   surface: "#dfdfdf",
   error: "#e15151",
+  text: "#000000",
 } as const;

@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { EventType } from "../types/eventType";
+import { colors } from "@/constants/styles";
 
 type Props = {
   item: EventType;
@@ -55,8 +56,10 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
     marginBottom: 3,
+    color: colors.text,
   },
   bodyText: {
-    fontSize: 16
+    fontSize: 16,
+    color: colors.text
   },
 });
