@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 import { EventType } from "../types/eventType";
 import AddToFavouritesBtn from "./AddToFavouritesBtn";
 import Item from "./Item";
+import { colors } from "@/constants/styles";
 
 type Props = {
   data: EventType[];
   setVisibleCount?: Dispatch<SetStateAction<number>>;
-  
 };
 
 export default function EventResultList({ data, setVisibleCount }: Props) {
@@ -16,14 +16,7 @@ export default function EventResultList({ data, setVisibleCount }: Props) {
       data={data}
       renderItem={({ item }: { item: EventType }) => (
         <View
-          style={{
-            backgroundColor: "lightgrey",
-            margin: 8,
-            padding: 4,
-            borderColor: "black",
-            borderRadius: 8,
-            borderWidth: 3,
-          }}
+          style={styles.listContainer}
         >
           <Item item={item}></Item>
           <AddToFavouritesBtn
@@ -40,4 +33,18 @@ export default function EventResultList({ data, setVisibleCount }: Props) {
   );
 }
 
+const styles = StyleSheet.create({
+  listContainer: {
+    backgroundColor: colors.primary,
+    margin: 8,
+    marginLeft: "auto",
+    padding: 10,
+    borderColor: colors.secondary,
+    borderRadius: 8,
+    borderWidth: 3,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  }
+});
 

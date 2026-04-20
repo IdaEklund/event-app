@@ -1,9 +1,11 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useContext } from "react";
-import { Pressable, Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { FavouritesContext } from "@/context/FavouritesContext";
 import { EventType } from "@/types/eventType";
+import Btn from "@/components/Btn";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { colors } from "@/constants/styles";
 
 export default function Modal() {
   const router = useRouter();
@@ -47,46 +49,42 @@ export default function Modal() {
 
   return (
     <View style={styles.modal}>
-      <Pressable
-        style={{
-          backgroundColor: "white",
-          width: 100,
-          height: 40,
-          borderWidth: 2,
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 30,
-        }}
-        onPress={() => router.back()}
-      >
-        <Text>Stäng ner</Text>
-      </Pressable>
       <View style={styles.modalContent}>
-        <Text>{title}</Text>
-        <Text>{venue}</Text>
-        <Text>{date}</Text>
-        <Text>{time}</Text>
-        <Text>{address}</Text>
-        <Text>{city}</Text>
+        <Text style={styles.titleText}>{title}</Text>
+        <Text style={styles.italicText}>///////////////////</Text>
+        <Text style={styles.italicText}>//Plats för bild//</Text>
+        <Text style={styles.italicText}>//////////////////</Text>
+        {venue && (
+          <Text style={styles.venueText}>
+            {venue}
+          </Text>
+        )}
+        <Text style={styles.bodyText}>
+          {date}
+          {", "}
+          {time}
+        </Text>
+        <Text style={styles.bodyText}>{address}</Text>
+        <Text style={styles.italicText}>{city}</Text>
+        <Text
+          style={styles.ticketText}
+        >
+          //Plats för biljettlänk//
+        </Text>
       </View>
-      <Pressable
-        style={{
-          backgroundColor: "white",
-          width: 100,
-          height: 40,
-          borderWidth: 2,
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: 40,
-        }}
-        onPress={toggleFavourite}
-      >
-        <MaterialCommunityIcons
-          name={isFavourite ? "heart" : "heart-outline"}
-          size={24}
-          color="black"
-        />
-      </Pressable>
+
+      <View style={styles.btnContainer}>
+        <Btn onPress={() => router.back()}>
+          <Text>Stäng ner</Text>
+        </Btn>
+        <Btn onPress={toggleFavourite}>
+          <MaterialCommunityIcons
+            name={isFavourite ? "heart" : "heart-outline"}
+            size={24}
+            color="black"
+          />
+        </Btn>
+      </View>
     </View>
   );
 }
@@ -94,16 +92,55 @@ export default function Modal() {
 
 const styles = StyleSheet.create({
   modal: {
+    width: "80%",
+    margin: "auto",
+    marginBottom: 80,
+    padding: 14,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "lightgrey",
-    height: "100%",
-    borderRadius: 4,
+    backgroundColor: colors.surface,
+    opacity: 0.95,
+    height: "80%",
+    borderRadius: 30,
+    borderColor: colors.secondary,
+    borderWidth: 3,
   },
   modalContent: {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    gap: 8,
+  },
+  titleText: {
+    fontWeight: "700",
+    fontSize: 26,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  italicText: {
+    fontWeight: "500",
+    fontSize: 16,
+    fontStyle: "italic",
+  },
+  venueText: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  bodyText: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  ticketText: {
+    fontWeight: "500",
+    fontSize: 16,
+    fontStyle: "italic",
+    marginTop: 30,
+  },
+  btnContainer: {
+    flexDirection: "row",
+    marginLeft: 40,
+    marginRight: 40,
+    marginTop: 20,
   },
 });
 

@@ -10,7 +10,6 @@ type Props = {
 };
 
 
-
 export default function AddToFavouritesBtn({ item }: Props) {
 
   const { favourites, setFavourites } = useContext(FavouritesContext);
@@ -29,8 +28,6 @@ export default function AddToFavouritesBtn({ item }: Props) {
         setFavourites([...favourites, item]);
       }
     }
-  
-
 
 
   return (
@@ -39,7 +36,7 @@ export default function AddToFavouritesBtn({ item }: Props) {
     >
       <MaterialCommunityIcons
         name={isFavourite ? "heart" : "heart-outline"}
-        size={24}
+        size={30}
         color="black"
       />
     </Pressable>

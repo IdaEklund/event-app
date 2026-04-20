@@ -1,4 +1,5 @@
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View, StyleSheet } from "react-native";
+import {colors} from "@/constants/styles"; 
 
 type Props = {
   title: string;
@@ -23,30 +24,51 @@ export default function FavouriteCard({
 }: Props) {
   return (
     <View
-      style={{
-        backgroundColor: "white",
-        margin: 8,
-        padding: 10,
-        borderColor: "black",
-        borderRadius: 8,
-        borderWidth: 3,
-      }}
+      style={styles.cardContainer}
     >
-      <Text>{title}</Text>
-      <Text>{venue}</Text>
-      <Text>{date}</Text>
-      <Text>{time}</Text>
-      <Text>{address}</Text>
-      <Text>{city}</Text>
+      <Text style={styles.titleText}>{title}</Text>
+      {venue && <Text style={{ fontSize: 16}}>{venue}</Text>}
+      <Text style={styles.bodyText}>{date}{", "}{time}</Text>
+      <Text style={styles.bodyText}>{address}</Text>
+      <Text style={styles.italicText}>{city}</Text>
       <Pressable
         onPress={() => {
           removeFromFavourites(id);
         }}
       >
-        <Text style={{ fontWeight: "600", marginTop: 20 }}>
+        <Text style={styles.removeText}>
           Ta bort från favoriter
         </Text>
       </Pressable>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  cardContainer: {
+    backgroundColor: colors.primary,
+    margin: 3,
+    marginBottom: 8,
+    padding: 10,
+    borderColor: colors.secondary,
+    borderRadius: 8,
+    borderWidth: 3,
+    gap: 5,
+  },
+  titleText: {
+    fontWeight: "700",
+    fontSize: 22,
+    marginBottom: 14,
+  },
+  bodyText: {
+    fontSize: 16,
+  },
+  italicText: {
+    fontWeight: "500",
+    fontSize: 16,
+    fontStyle: "italic",
+  },
+  removeText: {
+    fontWeight: "800", marginTop: 20 
+  }
+});

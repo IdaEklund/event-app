@@ -1,8 +1,9 @@
 import { Picker } from "@react-native-picker/picker";
 import { Dispatch, SetStateAction } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { CityType } from "@/types/cityType";
 import Btn from "./Btn";
+import { colors } from "@/constants/styles";
 
 
 type Props = {
@@ -41,7 +42,7 @@ export default function CityPicker({
       </Btn>
 
       {showPicker && (
-        
+        <View style={styles.pickerContainer}>
           <Picker
             style={styles.picker}
             selectedValue={String(selectedCity.id)}
@@ -62,32 +63,34 @@ export default function CityPicker({
               setIsLoading(true);
               setCityIsSelected(true);
             }}
-            itemStyle={{ height: 44, backgroundColor: "lightgrey" }}
+            itemStyle={{ height: 40, backgroundColor: colors.surface }}
           >
             {mainCities.map((city) => (
               <Picker.Item
                 key={city.id}
                 label={city.title}
                 value={String(city.id)}
-                style={styles.pickerItem}
               />
             ))}
           </Picker>
-      
+        </View>
       )}
     </>
   );
 }
 
 const styles = StyleSheet.create({
-
+  pickerContainer: {
+    borderRadius: 20,
+    overflow: "hidden",
+    backgroundColor: colors.surface,
+    color: colors.primary,
+    width: 200,
+  },
   picker: {
-    flex: 1,
-    
+    backgroundColor: colors.surface,
     width: "100%",
-    
-  },
-  pickerItem: {
-    backgroundColor: "green",
-  },
+    borderRadius: 20,
+    marginBottom: 5,
+  }
 });

@@ -1,6 +1,7 @@
 //import { useRouter } from "expo-router";
 import { Dispatch, SetStateAction } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { colors } from "@/constants/styles";
 
 type Props = {
   setIsError: Dispatch<SetStateAction<boolean>>;
@@ -17,7 +18,7 @@ export default function ErrorMessage({ setIsError }: Props) {
           setIsError(false);
         }}
       >
-        <Text style={styles.closeText}>Stäng</Text>
+        <Text style={styles.closeText}>- Tryck för att stänga -</Text>
       </Pressable>
     </View>
   );
@@ -26,7 +27,7 @@ export default function ErrorMessage({ setIsError }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f65151",
+    backgroundColor: colors.error,
     alignItems: "center",
     alignSelf: "center",
     justifyContent: "center",
@@ -36,15 +37,15 @@ const styles = StyleSheet.create({
     zIndex: 200,
   },
   errorText: {
-    fontSize: 20,
+    fontSize: 28,
     fontWeight: "700",
-    color: "white",
-    marginBottom: 20
+    color: colors.primary,
+    marginBottom: 60
   },
   closeText: {
-    fontSize: 15,
-    fontWeight: "700",
-    color: "white",
+    fontSize: 16,
+    fontWeight: "500",
+    color: colors.primary,
     marginBottom: 20
   }
 });

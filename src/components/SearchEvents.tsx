@@ -3,6 +3,7 @@ import { Text, TextInput, StyleSheet, View } from "react-native";
 import { CityType } from "@/types/cityType";
 import { EventType } from "@/types/eventType";
 import Btn from "./Btn";
+import { colors } from "@/constants/styles";
 
 
 type Props = {
@@ -56,8 +57,6 @@ export default function SearchEvents({
           }}
           value={searchKeyword}
         ></TextInput>
-        
-        
         </>
       )}
 
@@ -67,7 +66,7 @@ export default function SearchEvents({
       )}
 
       {showCityList && (
-        <Text>
+        <Text style={styles.whichCityText}>
           Visar resultat för:{" "}
           {currentCity ? currentCity.title : "Ingen stad vald"}
         </Text>
@@ -80,23 +79,29 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
   },
   searchInput: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#e3cece",
-    width: 120,
-    height: 30,
-    marginBottom: 10
+    backgroundColor: colors.surface,
+    padding: 10,
+    fontSize: 16,
+    width: 200,
+    height: 40,
+    marginBottom: 10,
+    borderRadius: 20,
   },
   searchMessage: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "yellow",
+    color: colors.error,
+    fontSize: 15,
     width: "auto",
     height: 30,
-    
+    marginTop: 20,
+  },
+  whichCityText: {
+    color: colors.secondary
   },
 });
 

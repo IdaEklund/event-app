@@ -37,7 +37,7 @@ export default async function fetchEvents({
       id: e.id,
       title: e.name,
       date: e.dates?.start?.localDate ?? "",
-      time: e.dates?.start?.localTime ?? "",
+      time: e.dates?.start?.localTime?.slice(0, 5) ?? "",
       venue: e._embedded?.venues?.[0]?.name ?? "",
       address: e._embedded?.venues?.[0]?.address?.line1 ?? "",
       city: e._embedded?.venues?.[0]?.city?.name ?? "",

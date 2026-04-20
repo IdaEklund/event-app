@@ -10,7 +10,7 @@ export default function Item({ item }: Props) {
   const router = useRouter();
 
   return (
-    <View>
+    <View style={styles.itemContainer}>
       <Pressable
         onPress={() => {
           router.push({
@@ -26,25 +26,37 @@ export default function Item({ item }: Props) {
             },
           });
         }}
-       
       >
-        <Text style={styles.item}>
-          {item.title}
-          {item.date}
-          {item.time} {item.venue}
-          {item.city}
-          {item.address}
-        </Text>
+        <View style={styles.eventContainer}>
+          <Text style={styles.titleText}>{item.title}</Text>
+          <Text style={styles.bodyText}>
+            {item.date}
+            {", "}
+            {item.time}
+          </Text>
+          {item.venue && <Text style={styles.bodyText}>{item.venue}</Text>}
+          <Text style={styles.bodyText}>{item.city}</Text>
+        </View>
       </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  
-  
-  item: {
-    fontWeight: "500",
+  itemContainer: {
+    width: "90%",
+  },
+  eventContainer: {
+    justifyContent: "center",
     flexDirection: "column",
+    gap: 4,
+  },
+  titleText: {
+    fontWeight: "700",
+    fontSize: 16,
+    marginBottom: 3,
+  },
+  bodyText: {
+    fontSize: 16
   },
 });
