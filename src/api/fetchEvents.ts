@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { ApiType } from "@/types/apiType";
-import { CityType } from "@/types/cityType";
-import { EventType } from "@/types/eventType";
+import type { ApiType } from "@/types/apiType";
+import type { CityType } from "@/types/cityType";
+import type { EventType } from "@/types/eventType";
 
 type Props = {
   currentCity: CityType;

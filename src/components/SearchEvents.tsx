@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Text, TextInput, StyleSheet, View } from "react-native";
-import { CityType } from "@/types/cityType";
-import { EventType } from "@/types/eventType";
+import type { CityType } from "@/types/cityType";
+import type { EventType } from "@/types/eventType";
 import Btn from "./Btn";
 import { colors } from "@/constants/styles";
 

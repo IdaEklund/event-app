@@ -2,7 +2,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { FavouritesContext } from "@/context/FavouritesContext";
-import { EventType } from "@/types/eventType";
+import type { EventType } from "@/types/eventType";
 import Btn from "@/components/Btn";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { colors } from "@/constants/styles";
@@ -20,32 +20,33 @@ export default function Modal() {
     city: string;
   }>();
 
-  const { favourites, setFavourites } = useContext(FavouritesContext);
+  const { favourites, addFavourite, removeFavourite } =
+    useContext(FavouritesContext);
 
   //Kontrollerar om eventet finns i favoriter.
   const isFavourite = favourites.some((fav) => fav.id === id);
 
-  function toggleFavourite() {
-    const favouriteEvent: EventType = {
-      id,
-      title,
-      date,
-      time,
-      venue,
-      address,
-      city,
-    };
-
-    //Om hjärtat är ifyllt (eventet finns i favoriter) kan man klicka på det
-    //för att ta bort eventet från favoriter.
-    if (isFavourite) {
-      setFavourites(favourites.filter(event => event.id !== id));
-    }
-      else {
-        setFavourites([...favourites, favouriteEvent]);
-      }
-    }
-  
+ 
+   function toggleFavourite() {
+     const favouriteEvent: EventType = {
+       id,
+       title,
+       date,
+       time,
+       venue,
+       address,
+       city,
+     };
+      //Om hjärtat är ifyllt (eventet finns i favoriter) kan man klicka på det
+        //för att ta bort eventet från favoriter.
+     if (isFavourite) {
+       removeFavourite(id);
+     } else {
+       addFavourite(favouriteEvent);
+     }
+   }  
+   
+ 
 
   return (
     <View style={styles.modal}>
@@ -54,11 +55,7 @@ export default function Modal() {
         <Text style={styles.italicText}>///////////////////</Text>
         <Text style={styles.italicText}>//Plats för bild//</Text>
         <Text style={styles.italicText}>//////////////////</Text>
-        {venue && (
-          <Text style={styles.venueText}>
-            {venue}
-          </Text>
-        )}
+        {venue && <Text style={styles.venueText}>{venue}</Text>}
         <Text style={styles.bodyText}>
           {date}
           {", "}
@@ -66,11 +63,7 @@ export default function Modal() {
         </Text>
         <Text style={styles.bodyText}>{address}</Text>
         <Text style={styles.italicText}>{city}</Text>
-        <Text
-          style={styles.ticketText}
-        >
-          //Plats för biljettlänk//
-        </Text>
+        <Text style={styles.ticketText}>//Plats för biljettlänk//</Text>
       </View>
 
       <View style={styles.btnContainer}>

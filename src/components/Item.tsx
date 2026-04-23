@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { EventType } from "../types/eventType";
+import type { EventType } from "../types/eventType";
 import { colors } from "@/constants/styles";
 
 type Props = {

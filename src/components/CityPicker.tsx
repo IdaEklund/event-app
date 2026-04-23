@@ -1,7 +1,7 @@
 import { Picker } from "@react-native-picker/picker";
 import { Dispatch, SetStateAction } from "react";
 import { StyleSheet, View } from "react-native";
-import { CityType } from "@/types/cityType";
+import type { CityType } from "@/types/cityType";
 import Btn from "./Btn";
 import { colors } from "@/constants/styles";
 

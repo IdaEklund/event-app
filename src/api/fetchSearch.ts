@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import { ApiType } from "@/types/apiType";
-import { EventType } from "@/types/eventType";
+import type { ApiType } from "@/types/apiType";
+import type { EventType } from "@/types/eventType";
 
 type Props = {
   searchKeyword: string;

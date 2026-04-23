@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { FlatList, View, StyleSheet } from "react-native";
-import { EventType } from "../types/eventType";
+import type { EventType } from "../types/eventType";
 import AddToFavouritesBtn from "./AddToFavouritesBtn";
 import Item from "./Item";
 import { colors } from "@/constants/styles";

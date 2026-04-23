@@ -8,13 +8,9 @@ import GradientBackground from "@/components/GradientBackground";
 
 export default function Favourites() {
 
-  const { favourites, setFavourites } = useContext(FavouritesContext);
+  const { favourites, removeFavourite } = useContext(FavouritesContext);
 
-  function removeFromFavourites(id: string) {
-    const favouritesAfterUpdate = favourites.filter((item) => item.id !== id);
-
-    setFavourites(favouritesAfterUpdate);
-  }
+  
 
   return (
     <GradientBackground>
@@ -31,7 +27,7 @@ export default function Favourites() {
               time={favourite.time}
               address={favourite.address}
               city={favourite.city}
-              removeFromFavourites={removeFromFavourites}
+              removeFromFavourites={removeFavourite}
             ></FavouriteCard>
           ))}
         </ScrollView>
