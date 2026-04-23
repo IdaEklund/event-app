@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontWeight: "700",
-    fontSize: 22,
+    fontSize: 18,
     marginBottom: 14,
   },
   bodyText: {

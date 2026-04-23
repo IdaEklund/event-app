@@ -1,9 +1,13 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   createContext,
   ReactNode,
+  useEffect,
   useState,
 } from "react";
 import type { EventType } from "../types/eventType";
+
+const STORAGE_KEY = "favourites";
 
 type FavouritesContextType = {
   favourites: EventType[];
@@ -22,8 +26,21 @@ type FavouritesProviderProps = {
 };
 
 export function FavouritesProvider({ children }: FavouritesProviderProps) {
-  
   const [favourites, setFavourites] = useState<EventType[]>([]);
+
+  // Ladda favoriter vid app-start
+  useEffect(() => {
+    async function loadFavourites() {
+      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      if (stored) setFavourites(JSON.parse(stored));
+    }
+    loadFavourites();
+  }, []);
+
+  // Spara favoriter varje gång de ändras
+  useEffect(() => {
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(favourites));
+  }, [favourites]);
 
   function addFavourite(event: EventType) {
     setFavourites((prev) => {
@@ -37,9 +54,10 @@ export function FavouritesProvider({ children }: FavouritesProviderProps) {
     setFavourites((prev) => prev.filter((e) => e.id !== id));
   }
 
-
   return (
-    <FavouritesContext.Provider value={{ favourites, addFavourite, removeFavourite }}>
+    <FavouritesContext.Provider
+      value={{ favourites, addFavourite, removeFavourite }}
+    >
       {children}
     </FavouritesContext.Provider>
   );
